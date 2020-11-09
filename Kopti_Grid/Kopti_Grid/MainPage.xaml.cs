@@ -13,6 +13,7 @@ namespace Kopti_Grid
         Picker picker;
         Editor editor;
         DatePicker dpicker;
+        Entry entry;
         public MainPage()
         {
             Grid gr = new Grid
@@ -49,9 +50,20 @@ namespace Kopti_Grid
                 MinimumDate = DateTime.Now.AddDays(-10),
                 MaximumDate = DateTime.Now.AddDays(10),
             };
+            dpicker.DateSelected += Dpicker_DateSelected;
             gr.Children.Add(dpicker, 1, 1);
+
+            entry = new Entry { Text = "Vali kuupäev" };
+            gr.Children.Add(entry, 0, 1);
+
             Content = gr;
         }
+
+        private void Dpicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            entry.Text = "Sinu kuuoäev:" + e.NewDate.ToString("G");
+        }
+
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
         {
             editor.Text = "Oli valitud: " + picker.Items[picker.SelectedIndex];
