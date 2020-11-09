@@ -14,6 +14,7 @@ namespace Kopti_Grid
         Editor editor;
         DatePicker dpicker;
         Entry entry;
+        TimePicker tpicker;
         public MainPage()
         {
             Grid gr = new Grid
@@ -52,6 +53,13 @@ namespace Kopti_Grid
             };
             dpicker.DateSelected += Dpicker_DateSelected;
             gr.Children.Add(dpicker, 1, 1);
+
+            tpicker = new TimePicker()
+            {
+                Time = new TimeSpan(18, 0, 0)
+            };
+           
+            gr.Children.Add(tpicker,1,2);
 
             entry = new Entry { Text = "Vali kuupäev" };
             gr.Children.Add(entry, 0, 1);
