@@ -56,7 +56,8 @@ namespace Kopti_Grid
 
             tpicker = new TimePicker()
             {
-                Time = new TimeSpan(18, 0, 0)
+               // Time = new TimeSpan(18, 0, 0)
+               Time =new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute,DateTime.Now.Second)
             };
            
             gr.Children.Add(tpicker,1,2);
