@@ -15,6 +15,7 @@ namespace Kopti_Grid
         DatePicker dpicker;
         Entry entry;
         TimePicker tpicker;
+        Frame frame;
         public MainPage()
         {
             Grid gr = new Grid
@@ -59,18 +60,31 @@ namespace Kopti_Grid
                // Time = new TimeSpan(18, 0, 0)
                Time =new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute,DateTime.Now.Second)
             };
-           
-            gr.Children.Add(tpicker,1,2);
 
+            tpicker.PropertyChanged += Tpicker_PropertyChanged;
+            gr.Children.Add(tpicker,1,2);
             entry = new Entry { Text = "Vali kuupäev" };
             gr.Children.Add(entry, 0, 1);
+
+            frame = new Frame();
+            gr.Children.Add(frame, 2, 1);
+
 
             Content = gr;
         }
 
+        private void Tpicker_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName==TimePicker.TimeProperty.PropertyName)
+            {
+                TimeSpan selectTime = tpicker.Time;
+                entry.Text = selectTime.ToString();
+            }
+        }
+
         private void Dpicker_DateSelected(object sender, DateChangedEventArgs e)
         {
-            entry.Text = "Sinu kuuoäev:" + e.NewDate.ToString("G");
+            entry.Text = "Sinu kuupäev:" + e.NewDate.ToString("G");
         }
 
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
