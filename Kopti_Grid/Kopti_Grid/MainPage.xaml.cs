@@ -12,6 +12,7 @@ namespace Kopti_Grid
     {
         Picker picker;
         Editor editor;
+        DatePicker dpicker;
         public MainPage()
         {
             Grid gr = new Grid
@@ -42,6 +43,13 @@ namespace Kopti_Grid
             editor = new Editor { Placeholder = "Vali keel \n nimikirjast" };
             gr.Children.Add(editor, 1, 0);
 
+            dpicker = new DatePicker
+            {
+                Format = "D",
+                MinimumDate = DateTime.Now.AddDays(-10),
+                MaximumDate = DateTime.Now.AddDays(10),
+            };
+            gr.Children.Add(dpicker, 1, 1);
             Content = gr;
         }
         private void Picker_SelectedIndexChanged(object sender, EventArgs e)
